@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 
 type Props = {
@@ -6,13 +7,26 @@ type Props = {
   onDecrement: () => void;
 };
 function App({ value, onIncrement, onDecrement }: Props) {
+  const [todoValue, setTodoValue] = useState("");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTodoValue(e.target.value);
+  };
+  const addTodo = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    setTodoValue("");
+  };
+
   return (
-    <p>
+    <div>
       {/* Clicked :{value} times */} <button onClick={onIncrement}>+</button>{" "}
       <button onClick={onDecrement}>-</button>
-    </p>
+      <ul></ul>
+      <form onSubmit={addTodo}>
+        <input type="text" value={todoValue} onChange={handleChange} />
+        <input type="submit" />
+      </form>
+    </div>
   );
 }
-
 
 export default App;
