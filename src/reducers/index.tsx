@@ -9,3 +9,8 @@ const rootReducer = combineReducers({
 });
 
 export default rootReducer;
+
+// RootState 타입을 정의합니다.
+// ReturnType<typeof rootReducer>는 rootReducer 함수의 반환 타입을 추론하여 RootState 타입으로 설정합니다.
+// 이 타입은 Redux 상태의 전체 구조를 나타냅니다.
+export type RootState = ReturnType<typeof rootReducer>;
