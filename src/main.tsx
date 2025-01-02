@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import rootReducer from "./reducers/index.tsx";
 import { applyMiddleware, createStore } from "redux";
 import { Provider } from "react-redux";
+import { thunk } from "redux-thunk";
 const root = createRoot(document.getElementById("root") as HTMLElement);
 const loggerMiddleware = (store: any) => (next: any) => (action: any) => {
   console.log("store", store);
@@ -13,7 +14,7 @@ const loggerMiddleware = (store: any) => (next: any) => (action: any) => {
 };
 
 // middleware: dispatch가 발생한 후, reducer에 도달하기 전 시점에 간섭하여 액션을 처리하거나 수정할 수 있는 중간 전처리기
-const middleware = applyMiddleware(loggerMiddleware);
+const middleware = applyMiddleware(thunk,loggerMiddleware);
 const store = createStore(rootReducer, middleware);
 const render = () =>
   root.render(
